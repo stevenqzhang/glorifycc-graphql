@@ -1,0 +1,35 @@
+
+# Maps to https://github.com/TheoTech/glorifycc/blob/master/models/language.js
+type Language {
+    label: String!
+    code: String!
+}
+
+# Maps to https://github.com/TheoTech/glorifycc/blob/master/models/song.js
+type Song {
+    title: String!
+    author: String!
+
+    # TODO type the languages as enums?
+    lang: Language!
+    translator: String!
+    contributor: String!
+}
+
+# Maps to https://github.com/TheoTech/glorifycc/blob/master/models/user.js
+type User {
+    username: String!
+    email: String!
+    password: String!
+    library: [Song!]        # library can be empty, so the array is nullable
+}
+
+
+# Maps to https://github.com/TheoTech/glorifycc/blob/master/models/playlist.js
+type PlayList {
+    owner: User!
+    name: String!
+    song: Song!
+    translationsChecked: [Song!]  # translationsChecked can be empty, so the array is nullable
+    availableTranslations: [Song!]   #
+}
