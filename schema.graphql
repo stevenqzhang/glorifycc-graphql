@@ -60,4 +60,19 @@ type Mutation {
         timeAdded: Date,
     ): Song
     deleteSong (id: ID!): Song
+    updateSong (
+        id: ID!,
+        title: String,
+        author: String,
+        lang: Language,
+        translator: String,
+        contributor: String,
+        lang: Language!,
+        translator: String,
+        contributor: String,
+        copyright: String,
+        lyrics: [String],
+        oriSong: String,
+        timeAdded: Date,
+    ): Song
 }
