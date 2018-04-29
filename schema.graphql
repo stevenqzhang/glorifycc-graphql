@@ -1,6 +1,7 @@
 
 # Maps to https://github.com/TheoTech/glorifycc/blob/master/models/language.js
 type Language {
+    id: ID!
     label: String!
     code: String!
 }
@@ -58,4 +59,5 @@ type Mutation {
         oriSong: String,
         timeAdded: Date,
     ): Song
+    deleteSong (id: ID!): Song
 }
