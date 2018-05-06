@@ -45,10 +45,10 @@ type PlayList {
 }
 
 type Mutation {
-    addSong (   #Todo make a songinput type- figure out depending on implementation?
+    addSong (   #Todo make a songinput type- figure out depending on implementation? 
         title: String!,
         author: String!,
-        lanuage: Language!,
+        language: ID!,  # TODo should language be an enum or an object? if latter, we have to use unwieldy IDs
         translator: String,
         contributor: String,
         translator: String,
@@ -63,7 +63,7 @@ type Mutation {
         id: ID!,
         title: String,
         author: String,
-        language: Language,
+        language: ID!,
         translator: String,
         contributor: String,
         copyright: String,
@@ -79,7 +79,7 @@ type Query {
         id: ID,
         titleRegex: String,
         authorRegex: String,
-        language: [Language],
+        language: [ID],
         translatorRegex: String,
         lyricsRegex: String,
     ): [Song]
