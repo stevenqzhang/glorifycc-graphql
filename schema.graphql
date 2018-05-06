@@ -55,7 +55,7 @@ type Mutation {
         contributor: String,
         copyright: String,
         lyrics: [String],
-        oriSong: String,
+        parentSong: String,
         timeAdded: Date,
     ): Song
     deleteSong (id: ID!): Song
@@ -68,7 +68,7 @@ type Mutation {
         contributor: String,
         copyright: String,
         lyrics: [String],
-        oriSong: String,
+        parentSong: String,
         timeAdded: Date,
     ): Song
 }
