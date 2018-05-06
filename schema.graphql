@@ -2,7 +2,7 @@
 # Maps to https://github.com/TheoTech/glorifycc/blob/master/models/language.js
 type Language {
     id: ID!
-    label: String!  # should this be a enum?
+    label: String!
     code: String!
 }
 
@@ -15,12 +15,12 @@ type Song {
     author: String!
 
     # TODO type the languages as enums?
-    lang: Language!
+    language: Language!
     translator: String
     contributor: String
     copyright: String
     lyrics: [String]
-    oriSong: String
+    parentSong: Song
     timeAdded: Date
 }
 
@@ -39,19 +39,18 @@ type PlayList {
     id: ID!
     owner: User!
     name: String!
-    song: Song!
+    songs: [Song!]!
     translationsChecked: [Song!]  # translationsChecked can be empty, so the array is nullable
     availableTranslations: [Song!]   #
 }
 
 type Mutation {
-    addSong (   #Todo make a songinput type?
+    addSong (   #Todo make a songinput type- figure out depending on implementation?
         title: String!,
         author: String!,
-        lang: Language!,
+        lanuage: Language!,
         translator: String,
         contributor: String,
-        lang: Language!,
         translator: String,
         contributor: String,
         copyright: String,
@@ -64,7 +63,7 @@ type Mutation {
         id: ID!,
         title: String,
         author: String,
-        lang: Language,
+        language: Language,
         translator: String,
         contributor: String,
         copyright: String,
@@ -80,7 +79,7 @@ type Query {
         id: ID,
         titleRegex: String,
         authorRegex: String,
-        lang: Language,
+        language: [Language],
         translatorRegex: String,
         lyricsRegex: String,
     ): [Song]
