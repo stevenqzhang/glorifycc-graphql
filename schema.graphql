@@ -1,23 +1,32 @@
 
 # Maps to https://github.com/TheoTech/glorifycc/blob/master/models/language.js
 type Language {
+    id: ID!
     label: String!
     code: String!
 }
 
+scalar Date
+
 # Maps to https://github.com/TheoTech/glorifycc/blob/master/models/song.js
 type Song {
+    id: ID!
     title: String!
     author: String!
 
     # TODO type the languages as enums?
-    lang: Language!
-    translator: String!
-    contributor: String!
+    language: Language!
+    translator: String
+    contributor: String
+    copyright: String
+    lyrics: [String]
+    parentSong: Song
+    timeAdded: Date
 }
 
 # Maps to https://github.com/TheoTech/glorifycc/blob/master/models/user.js
 type User {
+    id: ID!
     username: String!
     email: String!
     password: String!
@@ -27,9 +36,51 @@ type User {
 
 # Maps to https://github.com/TheoTech/glorifycc/blob/master/models/playlist.js
 type PlayList {
+    id: ID!
     owner: User!
     name: String!
-    song: Song!
+    songs: [Song!]!
     translationsChecked: [Song!]  # translationsChecked can be empty, so the array is nullable
     availableTranslations: [Song!]   #
+}
+
+type Mutation {
+    addSong (   #Todo make a songinput type- figure out depending on implementation? 
+        title: String!,
+        author: String!,
+        language: ID!,  # TODo should language be an enum or an object? if latter, we have to use unwieldy IDs
+        translator: String,
+        contributor: String,
+        translator: String,
+        contributor: String,
+        copyright: String,
+        lyrics: [String],
+        parentSong: String,
+        timeAdded: Date,
+    ): Song
+    deleteSong (id: ID!): Song
+    updateSong (
+        id: ID!,
+        title: String,
+        author: String,
+        language: ID!,
+        translator: String,
+        contributor: String,
+        copyright: String,
+        lyrics: [String],
+        parentSong: String,
+        timeAdded: Date,
+    ): Song
+}
+
+type Query {
+    songs(
+        limit: Int,
+        id: ID,
+        titleRegex: String,
+        authorRegex: String,
+        language: [ID],
+        translatorRegex: String,
+        lyricsRegex: String,
+    ): [Song]
 }
